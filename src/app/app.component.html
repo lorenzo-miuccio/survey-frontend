@@ -17,13 +17,12 @@
   />
   <span>Welcome in ECIT Survey</span>
     <div class="spacer"></div>
-  <button>Login</button>
+  <a routerLink="/login" routerLinkActive="active" [skipLocationChange]=true><button>LOGIN</button></a> <!-- skipLocation rimane sulla stessa page -->
 </div>
 
 <div class="content" role="main">
 
-  <h1>Login</h1>
-  <app-login></app-login>
+  <router-outlet></router-outlet>
 
 </div>
 

@@ -1,5 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {Button} from "../app.component";
+
 
 @Component({
   selector: 'app-dialog-template',
@@ -8,7 +10,11 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 })
 export class DialogTemplateComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {title:string, buttons:}) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {
+    title:string,
+    component:string,
+    buttons: Button[]
+  }) { }
 
   ngOnInit(): void {
 

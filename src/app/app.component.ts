@@ -16,11 +16,10 @@ export class AppComponent {
 
     config.disableClose = true;
     config.id           = "login-component";
-    config.height       = "350px";
-    config.width        = "600px";
+    config.height       = "500px";
+    config.width        = "400px";
     config.data = {title: 'prova'}
 
-    // @ts-ignore
     let dialogRef = this.dialog.open(DialogTemplateComponent, config);
   }
 }

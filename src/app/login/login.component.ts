@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {DialogTemplateComponent} from "../dialog-template/dialog-template.component";
-import {AppComponent, Button} from "../app.component";
-import {RegisterComponent} from "../register/register.component";
-import {LoggedInPageComponent} from "../logged-in-page/logged-in-page.component";
+import {Button} from "../app.component";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +10,7 @@ import {LoggedInPageComponent} from "../logged-in-page/logged-in-page.component"
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<any>) { }
+  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<DialogTemplateComponent>) { }
 
   openRegister() {
 

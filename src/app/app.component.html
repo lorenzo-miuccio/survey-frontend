@@ -17,7 +17,7 @@
   />
   <span>Welcome in ECIT Survey</span>
     <div class="spacer"></div>
-  <button routerLink="/login" routerLinkActive="active" [skipLocationChange]=true>LOGIN</button> <!-- skipLocation rimane sulla stessa page -->
+  <button mat-stroked-button (click)="openLogin()">LOGIN</button> <!-- skipLocation rimane sulla stessa page -->
 </div>
 
 <div class="content" role="main">

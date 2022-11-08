@@ -40,7 +40,6 @@ export class Button {
   private _matDialogueClose: boolean;
   private _onFocus: boolean;
 
-
   constructor(label: string, matDialogueClose: boolean, onFocus: boolean) {
     this._label = label;
     this._matDialogueClose = matDialogueClose;

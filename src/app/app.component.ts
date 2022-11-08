@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {DialogTemplateComponent} from "./dialog-template/dialog-template.component";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 

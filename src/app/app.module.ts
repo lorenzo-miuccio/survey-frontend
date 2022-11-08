@@ -10,6 +10,7 @@ import { LoggedInPageComponent } from './logged-in-page/logged-in-page.component
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {MatButtonModule} from "@angular/material/button";
     DialogTemplateComponent,
     LoginComponent,
     RegisterComponent,
-    LoggedInPageComponent
+    LoggedInPageComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,

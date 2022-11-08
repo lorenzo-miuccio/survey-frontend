@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
     this.dialogRef.close();
     const config = new MatDialogConfig();
 
-    let b2 = new Button("CANCEL", false, false);
-    let b1 = new Button("ENTER", true, true);
+    let b2 = new Button("CANCEL", false);
+    let b1 = new Button("ENTER", true);
 
     let buttons: Button[] = [b2, b1];
 

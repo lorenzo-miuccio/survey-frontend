@@ -17,8 +17,8 @@ export class AppComponent {
 
     const config = new MatDialogConfig();
 
-    let b2 = new Button("CANCEL", false, false);
-    let b1 = new Button("ENTER", true, true);
+    let b2 = new Button("CANCEL", false);
+    let b1 = new Button("ENTER", true);
 
     let buttons: Button[] = [b2, b1];
 
@@ -37,13 +37,11 @@ export class AppComponent {
 
 export class Button {
   private _label: string;
-  private _matDialogueClose: boolean;
-  private _onFocus: boolean;
+  private _isEnter: boolean;
 
-  constructor(label: string, matDialogueClose: boolean, onFocus: boolean) {
+  constructor(label: string, isEnter: boolean) {
     this._label = label;
-    this._matDialogueClose = matDialogueClose;
-    this._onFocus = onFocus
+    this._isEnter = isEnter;
   }
 
 
@@ -51,11 +49,7 @@ export class Button {
     return this._label;
   }
 
-  get matDialogueClose(): boolean {
-    return this._matDialogueClose;
-  }
-
-  get onFocus(): boolean {
-    return this._onFocus;
+  get isEnter(): boolean {
+    return this._isEnter;
   }
 }

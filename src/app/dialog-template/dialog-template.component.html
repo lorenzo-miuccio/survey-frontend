@@ -1,8 +1,10 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
+
 <mat-dialog-content>
   <app-login *ngIf="data.component == 'login'"></app-login>
   <app-register *ngIf="data.component == 'register'"></app-register>
 </mat-dialog-content>
+
 <mat-dialog-actions align="center">
   <span *ngFor="let button of data.buttons;">
       <button *ngIf="button.isEnter" mat-button [mat-dialog-close]="true" cdkFocusInitial> {{button.label}} </button>

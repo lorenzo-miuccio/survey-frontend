@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Button} from "../app.component";
+import {AppComponent} from "../app.component";
 
 
 @Component({
@@ -14,7 +15,11 @@ export class DialogTemplateComponent implements OnInit {
     title:string,
     component:string,
     buttons: Button[]
-  }) { }
+  }, public dialogRef: MatDialogRef<DialogTemplateComponent>) { }
+
+  setPage(isHome:boolean) {
+    this.dialogRef.close();
+  }
 
   ngOnInit(): void {
 

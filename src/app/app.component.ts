@@ -11,7 +11,17 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 
 
 export class AppComponent {
-  constructor(public dialog: MatDialog) { }
+
+  private _home:Homepage;
+
+  constructor(public dialog: MatDialog) {
+    this._home = new Homepage(true);
+  }
+
+
+  get home(): Homepage {
+    return this._home;
+  }
 
   openLogin() {
 
@@ -51,5 +61,21 @@ export class Button {
 
   get isEnter(): boolean {
     return this._isEnter;
+  }
+}
+
+export class Homepage {
+    private _isHome: boolean;
+
+  constructor(isHome: boolean) {
+    this._isHome = isHome;
+  }
+
+  get isHome(): boolean {
+    return this._isHome;
+  }
+
+  set isHome(value: boolean) {
+    this._isHome = value;
   }
 }

@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {DialogTemplateComponent} from "./dialog-template/dialog-template.component";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {LoginComponent} from "./login/login.component";
 
 
 @Component({
@@ -23,7 +24,7 @@ export class AppComponent {
     return this._home;
   }
 
-  openLogin() {
+  openLogin(dialogTitle: string) {
 
     const config = new MatDialogConfig();
 
@@ -36,12 +37,15 @@ export class AppComponent {
     config.id           = "login-component";
     config.height       = "500px";
     config.width        = "400px";
-    config.data = {title: 'SIGN IN',
-      component: 'login',
+    config.data = {title: dialogTitle,
+      //component: window,
       buttons: buttons
     }
 
-    let dialogRef = this.dialog.open(DialogTemplateComponent, config);
+    let dialogRef = this.dialog.open(LoginComponent, config);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+    });
   }
 }
 

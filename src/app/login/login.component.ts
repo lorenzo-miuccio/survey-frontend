@@ -26,29 +26,6 @@ export class LoginComponent implements OnInit {
 
   }
 
-  openRegister() {
-
-    this.dialogRef.close();
-    const config = new MatDialogConfig();
-
-    let b2 = new Button("CANCEL", false);
-    let b1 = new Button("ENTER", true);
-
-    let buttons: Button[] = [b2, b1];
-
-    config.disableClose = true;
-    config.id           = "register-component";
-    config.height       = "500px";
-    config.width        = "400px";
-    config.data = {title: 'REGISTER',
-      component: 'register',
-      buttons: buttons
-    }
-
-    let dialogRef = this.dialog.open(DialogTemplateComponent, config);
-
-  }
-
   ngOnInit(): void {
     this.form = new FormGroup({
       mail: new FormControl('', [Validators.required, Validators.email]),

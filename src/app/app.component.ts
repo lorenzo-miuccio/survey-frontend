@@ -1,6 +1,6 @@
 import {Component, Injectable, Input} from '@angular/core';
 import {DialogTemplateComponent} from "./dialog-template/dialog-template.component";
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 

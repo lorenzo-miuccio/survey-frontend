@@ -9,19 +9,24 @@
       <form [formGroup]="form">
         <mat-card-content>
           <mat-form-field class="login-field">
-            <input matInput type="text" placeholder="Email" formControlName="mail" onInput="this.value = this.value.toLowerCase()">
-            <mat-error *ngIf="hasError('mail', 'required')">Mandatory Field</mat-error>
+            <input matInput type="mail" placeholder="Email" formControlName="mail" onInput="this.value = this.value.toLowerCase()">
+            <mat-error *ngIf="hasError('mail', 'required') || hasError('mail', 'email')">Mandatory Field</mat-error>
+            <mat-error *ngIf="hasError('mail', 'email')">Not correct</mat-error>
           </mat-form-field>
           <mat-form-field class="login-field">
-            <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="La tua password" formControlName="pass"/>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Password" formControlName="pass"/>
             <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
             <mat-error *ngIf="hasError('pass', 'required')">Mandatory field</mat-error>
           </mat-form-field>
+
+
+          <p>If you don't have an account <a routerLink="" (click)="appComp.openLogin('REGISTER')">click here</a></p>
+
         </mat-card-content>
 
         <mat-dialog-actions>
-          <button mat-raised-button class="login-button" color="primary" (click)="login()" [disabled]="!form.valid">CONFERMA</button>
-          <button mat-raised-button class="login-button" color="basic"   (click)="close()">CHIUDI</button>
+          <button mat-raised-button class="login-button" color="primary" (click)="login()" [disabled]="!form.valid">ENTER</button>
+          <button mat-raised-button class="login-button" color="basic"   (click)="close()">CLOSE</button>
         </mat-dialog-actions>
 
       </form>
@@ -30,6 +35,6 @@
   </mat-dialog-content>
 
 
-<p>If you don't have an account <a routerLink="" (click)="openRegister()">click here</a></p>
+
 
 </div>

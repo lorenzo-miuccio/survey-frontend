@@ -1,7 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, Injectable, Input} from '@angular/core';
 import {DialogTemplateComponent} from "./dialog-template/dialog-template.component";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {LoginComponent} from "./login/login.component";
+import {RegisterComponent} from "./register/register.component";
 
 
 @Component({
@@ -11,6 +12,9 @@ import {LoginComponent} from "./login/login.component";
 })
 
 
+@Injectable({
+  providedIn: 'any'
+})
 export class AppComponent {
 
   private _home:Homepage;
@@ -24,7 +28,7 @@ export class AppComponent {
     return this._home;
   }
 
-  openLogin(dialogTitle: string) {
+  public openLogin(dialogTitle: string) {
 
     const config = new MatDialogConfig();
 
@@ -34,7 +38,7 @@ export class AppComponent {
     let buttons: Button[] = [b2, b1];
 
     config.disableClose = true;
-    config.id           = "login-component";
+    //config.id           = "login-component";
     config.height       = "500px";
     config.width        = "400px";
     config.data = {title: dialogTitle,
@@ -42,10 +46,18 @@ export class AppComponent {
       buttons: buttons
     }
 
-    let dialogRef = this.dialog.open(LoginComponent, config);
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-    });
+    if(dialogTitle == "SIGN IN") {
+      let dialogRef = this.dialog.open(LoginComponent, config);
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log(result);
+      });
+    } else {
+      let dialogRef = this.dialog.open(RegisterComponent, config);
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log(result);
+      });
+    }
+
   }
 }
 

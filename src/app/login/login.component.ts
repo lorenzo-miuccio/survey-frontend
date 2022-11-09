@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {DialogTemplateComponent} from "../dialog-template/dialog-template.component";
-import {Button} from "../app.component";
+import {AppComponent, Button} from "../app.component";
 import {RestApiService} from "../services/rest-api.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
@@ -18,8 +18,10 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private ras: RestApiService,
-    public dialogRef: MatDialogRef<LoginComponent>,
-    public dialog: MatDialog
+    private dialogRef: MatDialogRef<LoginComponent>,
+    private dialog: MatDialog,
+    public appComp: AppComponent
+
   ) {
 
   }
@@ -49,7 +51,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      mail: new FormControl('', [Validators.required]),
+      mail: new FormControl('', [Validators.required, Validators.email]),
       pass: new FormControl('', [Validators.required])
     });
   }
@@ -61,7 +63,7 @@ export class LoginComponent implements OnInit {
       .then((res) => {
         this.dialogRef.close("login-ok");
       }).catch((err) => {
-        this.error = "Utente non riconosciuto";
+        this.error = "User not found";
       });
   }
 

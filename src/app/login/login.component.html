@@ -9,8 +9,8 @@
       <form [formGroup]="form">
         <mat-card-content>
           <mat-form-field class="login-field">
-            <input matInput type="text" placeholder="La tua mail" formControlName="mail" onInput="this.value = this.value.toLowerCase()">
-            <mat-error *ngIf="hasError('mail', 'required')">Email obbligatoria</mat-error>
+            <input matInput type="text" placeholder="Email" formControlName="mail" onInput="this.value = this.value.toLowerCase()">
+            <mat-error *ngIf="hasError('mail', 'required')">Mandatory Field</mat-error>
           </mat-form-field>
           <mat-form-field class="login-field">
             <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="La tua password" formControlName="pass"/>

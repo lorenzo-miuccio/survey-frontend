@@ -3,6 +3,7 @@ import {DialogTemplateComponent} from "./dialog-template/dialog-template.compone
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -19,7 +20,7 @@ export class AppComponent {
 
   private _home:Homepage;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, public router:Router) {
     this._home = new Homepage(true);
   }
 
@@ -49,6 +50,9 @@ export class AppComponent {
     if(dialogTitle == "SIGN IN") {
       let dialogRef = this.dialog.open(LoginComponent, config);
       dialogRef.afterClosed().subscribe((result) => {
+        if(result == 'login-ok'){
+          this.router.navigate(["homepage"]);
+        }
         console.log(result);
       });
     } else {

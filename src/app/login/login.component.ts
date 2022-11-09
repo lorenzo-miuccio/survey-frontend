@@ -4,6 +4,7 @@ import {DialogTemplateComponent} from "../dialog-template/dialog-template.compon
 import {AppComponent, Button} from "../app.component";
 import {RestApiService} from "../services/rest-api.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {User} from "../models/User";
 
 @Component({
   selector: 'app-login',
@@ -37,15 +38,19 @@ export class LoginComponent implements OnInit {
     this.error = "";
 
     await this.ras.callApi('http://localhost:8080/survey/api/check-user', 'POST', this.form.value)
-      .then((res) => {
-        this.dialogRef.close("login-ok");
+      .then((res) => { //res è boolean isAdmin
+        let u!:User;
+        if(res != null) {
+          u = new User(this.form.value['mail'], this.form.value['pass'], res);
+        }
+        this.dialogRef.close(u);
       }).catch((err) => {
         this.error = "User not found";
       });
   }
 
   public close() {
-    this.dialogRef.close("login-ko");
+    this.dialogRef.close(null);
   }
 
   public hasError(controlName: string, errorName: string): boolean {

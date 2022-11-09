@@ -13,7 +13,7 @@ export class RestApiService {
 
   callApi(url: string, method: string, body: any) {
     let promise = new Promise<void>((resolve, reject) => {
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+      let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
       switch (method.toUpperCase()) {
         case 'GET':

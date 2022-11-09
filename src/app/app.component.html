@@ -10,7 +10,7 @@
 
 <!-- Toolbar -->
 
-<div class="toolbar" role="banner">
+<div class="toolbar" role="banner" xmlns="http://www.w3.org/1999/html">
   <img
     width="70"
     alt="Ecit Logo"
@@ -18,15 +18,28 @@
   />
   <span>Welcome in ECIT Survey</span>
   <div class="spacer"></div>
-  <button *ngIf="this.home.isHome == true" mat-button (click)="openLogin('SIGN IN')">LOGIN</button> <!-- skipLocation rimane sulla stessa page -->
-  <button *ngIf="this.home.isHome == true" mat-button (click)="openLogin('NEW ACCOUNT')">REGISTER</button>
+  <button *ngIf="this.isLogged == false" mat-button (click)="openLogin('SIGN IN')">LOGIN</button> <!-- skipLocation rimane sulla stessa page -->
+  <button *ngIf="this.isLogged == false" mat-button (click)="openLogin('NEW ACCOUNT')">REGISTER</button>
+
+  <span *ngIf="this.isLogged == true"> {{ this.userLoggedIn.mail }}</span>
+
+  <span *ngIf="this.isLogged == true">
+    <button mat-button [matMenuTriggerFor]="menu"><mat-icon> account_circle </mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [disabled]="this.userLoggedIn.isAdmin" > <mat-icon> credit_card </mat-icon> UPGRADE</button>
+<!--      <button mat-menu-item (click)="logOut()">-->
+<!--        <mat-icon>exit_to_app</mat-icon>-->
+<!--        <span>EXIT ACCOUNT</span>-->
+<!--      </button>-->
+    </mat-menu>
+  </span>
   <!--  <button routerLink="/login" routerLinkActive="active" [skipLocationChange]=true> LOGIN <\a> -->
 </div>
 
 
 <div class="content" role="main">
 
-  <router-outlet outlet="ok"></router-outlet>
+<!--  <router-outlet name="test"></router-outlet>-->
   <router-outlet></router-outlet>
 
 </div>

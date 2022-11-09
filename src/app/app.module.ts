@@ -17,6 +17,7 @@ import {RegisterComponent} from "./register/register.component";
 import {HomepageComponent} from "./homepage/homepage.component";
 import {LoggedInPageComponent} from "./logged-in-page/logged-in-page.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {DialogTemplateComponent} from "../dialog-template/dialog-template.component";
-import {AppComponent, Button} from "../app.component";
 import {RestApiService} from "../services/rest-api.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "../models/User";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-login',

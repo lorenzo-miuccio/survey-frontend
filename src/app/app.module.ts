@@ -18,6 +18,7 @@ import {HomepageComponent} from "./homepage/homepage.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatMenuModule} from "@angular/material/menu";
 import { SurveyTableComponent } from './survey-table/survey-table.component';
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SurveyTableComponent } from './survey-table/survey-table.component';
     MatFormFieldModule,
     MatIconModule,
     ReactiveFormsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

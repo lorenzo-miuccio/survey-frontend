@@ -38,18 +38,10 @@ export class AppComponent {
 
     const config = new MatDialogConfig();
 
-    // let b2 = new Button("CANCEL", false);
-    // let b1 = new Button("ENTER", true);
-
-    //let buttons: Button[] = [b2, b1];
-
     config.disableClose = true;
-    //config.id           = "login-component";
     config.height       = "500px";
     config.width        = "400px";
     config.data = {title: dialogTitle,
-      //component: window,
-      //buttons: buttons
     }
 
     if(dialogTitle == "SIGN IN") {
@@ -58,7 +50,7 @@ export class AppComponent {
         if(result != null){
           this._userLoggedIn = result;
           this._isLogged = true;
-          this.router.navigate(["homepage"], {skipLocationChange: true});
+          //this.router.navigate(["homepage"], {skipLocationChange: true});
         }
         console.log(result);
       });
@@ -71,7 +63,7 @@ export class AppComponent {
           this._userLoggedIn = result;
           console.log(this._userLoggedIn)
           this._isLogged = true;
-          this.router.navigate(["homepage"], {skipLocationChange: true});
+          //this.router.navigate(["homepage"], {skipLocationChange: true});
         }
       });
     }
@@ -85,22 +77,4 @@ export class AppComponent {
   }
 }
 
-export class Button {
-  private _label: string;
-  private _isEnter: boolean;
-
-  constructor(label: string, isEnter: boolean) {
-    this._label = label;
-    this._isEnter = isEnter;
-  }
-
-
-  get label(): string {
-    return this._label;
-  }
-
-  get isEnter(): boolean {
-    return this._isEnter;
-  }
-}
 

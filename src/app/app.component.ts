@@ -50,7 +50,6 @@ export class AppComponent {
         if(result != null){
           this._userLoggedIn = result;
           this._isLogged = true;
-          //this.router.navigate(["homepage"], {skipLocationChange: true});
         }
         console.log(result);
       });
@@ -63,7 +62,6 @@ export class AppComponent {
           this._userLoggedIn = result;
           console.log(this._userLoggedIn)
           this._isLogged = true;
-          //this.router.navigate(["homepage"], {skipLocationChange: true});
         }
       });
     }
@@ -73,7 +71,7 @@ export class AppComponent {
   public logout() {
     this._isLogged = false;
     this._userLoggedIn = new User("", "", false);
-    this.router.navigate(["logout"], {skipLocationChange: true});
+    this.router.navigate(["homepage"], {skipLocationChange: true});
   }
 }
 

@@ -4,6 +4,7 @@ import {RestApiService} from "../services/rest-api.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AppComponent} from "../app.component";
 import {User} from "../models/User";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { title:string },
     private ras: RestApiService,
     private dialogRef: MatDialogRef<RegisterComponent>,
-    public appComp: AppComponent
+    public appComp: AppComponent,
+    public router: Router
   ) {
 
   }
@@ -40,6 +42,7 @@ export class RegisterComponent implements OnInit {
     await this.ras.callApi('http://localhost:8080/survey/api/insertUser', 'POST', this.formRegister.value)
       .then((res) => { //res è utente creato
         this.dialogRef.close(res);
+        //this.router.navigate(['homepage'], {skipLocationChange: true});
       }).catch((err) => {
         this.error = "Email already used";
       });

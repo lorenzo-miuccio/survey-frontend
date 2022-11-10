@@ -19,6 +19,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatMenuModule} from "@angular/material/menu";
 import { SurveyTableComponent } from './survey-table/survey-table.component';
 import {MatTableModule} from "@angular/material/table";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {MatTableModule} from "@angular/material/table";
     MatIconModule,
     ReactiveFormsModule,
     MatMenuModule,
-    MatTableModule
+    MatTableModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

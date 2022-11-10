@@ -15,7 +15,7 @@ export class SurveyTableComponent implements OnInit {
 
   private _surveys: Survey[] = [];
   public _dataSource!: MatTableDataSource<Survey>;
-  public displayedColumns: string[] = ['title', 'email'];
+  public displayedColumns: string[] = ['title', 'email', 'description', 'category', 'publishDate', 'endingDate'];
 
   constructor(public ras:RestApiService, private appComponent: AppComponent) {}
 

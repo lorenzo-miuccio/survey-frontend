@@ -1,12 +1,12 @@
 export interface Survey {
   id: number,
-  idMail: String,
+  id_mail: String,
   category: {
     id: number,
     name:String
   },
   name: String,
   description: string,
-  publishDate: Date,
+  publish_date: Date,
   ending_date: Date
 }

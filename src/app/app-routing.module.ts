@@ -10,9 +10,8 @@ const routes: Routes = [{
   path: 'app', component: AppComponent},{
   path: 'login', component: LoginComponent},{
   path: 'register', component: RegisterComponent}, {
-  path: 'homepage', component: HomepageComponent},
+  path: 'homepage', component: HomepageComponent}, {
   //{  path: 'homepage', component: HomepageComponent, outlet:"test"},
-  {path: 'logout', redirectTo: '', component:AppComponent}, {
   path: '', redirectTo: 'homepage', pathMatch: "full"}, { // reindirizza l'homepage sul router-outlet
   path: 'surveysTable', component:SurveyTableComponent}
 ];

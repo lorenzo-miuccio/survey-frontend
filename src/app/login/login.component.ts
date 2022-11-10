@@ -5,6 +5,7 @@ import {RestApiService} from "../services/rest-api.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "../models/User";
 import {AppComponent} from "../app.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
     private ras: RestApiService,
     private dialogRef: MatDialogRef<LoginComponent>,
     private dialog: MatDialog,
-    public appComp: AppComponent
+    public appComp: AppComponent,
+    public router: Router,
 
   ) {
 
@@ -45,12 +47,14 @@ export class LoginComponent implements OnInit {
           u = new User(this.form.value['mail'], this.form.value['pass'], res);
         }
         this.dialogRef.close(u);
+        //this.router.navigate(['homepage'], {skipLocationChange: true});
       }).catch((err) => {
-        this.error = "User not found";
+        this.error = "Email or password not correct";
       });
   }
 
   public close() {
+    //this.router.navigate(['homepage'], {skipLocationChange: true});
     this.dialogRef.close(null);
   }
 

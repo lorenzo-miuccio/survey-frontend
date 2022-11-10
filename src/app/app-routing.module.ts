@@ -12,8 +12,8 @@ const routes: Routes = [{
   path: 'register', component: RegisterComponent}, {
   path: 'logged-in-page', component: LoggedInPageComponent}, {
   path: 'homepage', component: HomepageComponent}, {
-  path: 'homepage', component: LoggedInPageComponent, outlet:"test"},
-
+  path: 'homepage', component: LoggedInPageComponent, outlet:"test"}, {
+  path: 'logout', redirectTo: '', component:AppComponent}
 ];
 
 @NgModule({

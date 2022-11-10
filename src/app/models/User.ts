@@ -1,12 +1,12 @@
 export class User {
 
-  private _password: String;
+  private _pass: String;
   private _mail:String;
   private _isAdmin:boolean;
 
 
-  constructor(password: String, mail: String, isAdmin: boolean) {
-    this._password = password;
+  constructor( mail: String, pass: String, isAdmin: boolean) {
+    this._pass = pass;
     this._mail = mail;
     this._isAdmin = isAdmin;
   }
@@ -16,8 +16,8 @@ export class User {
   }
 
 
-  get password(): String {
-    return this._password;
+  get pass(): String {
+    return this._pass;
   }
 
   get isAdmin(): boolean {

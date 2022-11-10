@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
       .then((res) => { //res è utente creato
         this.dialogRef.close(res);
       }).catch((err) => {
-        this.error = "User not found";
+        this.error = "Email already used";
       });
   }
 

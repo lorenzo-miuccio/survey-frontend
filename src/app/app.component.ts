@@ -66,17 +66,22 @@ export class AppComponent {
     } else {
       let dialogRef = this.dialog.open(RegisterComponent, config);
       dialogRef.afterClosed().subscribe((result) => {
-        console.log(result);
+        // console.log(result);
         if(result != null){
           this._userLoggedIn = result;
           console.log(this._userLoggedIn)
           this._isLogged = true;
           this.router.navigate(["homepage"], {skipLocationChange: true});
         }
-        console.log(result);
       });
     }
 
+  }
+
+  public logout() {
+    this._isLogged = false;
+    this._userLoggedIn = new User("", "", false);
+    this.router.navigate(["logout"], {skipLocationChange: true});
   }
 }
 

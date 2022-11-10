@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {RestApiService} from "../services/rest-api.service";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AppComponent} from "../app.component";
 import {User} from "../models/User";
 
@@ -19,11 +19,10 @@ export class RegisterComponent implements OnInit {
   public hidePassword:    boolean = true;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { title:string },
     private ras: RestApiService,
     private dialogRef: MatDialogRef<RegisterComponent>,
-    private dialog: MatDialog,
     public appComp: AppComponent
-
   ) {
 
   }

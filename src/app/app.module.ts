@@ -15,9 +15,9 @@ import { MatButtonModule          } from '@angular/material/button';
 import { ReactiveFormsModule      } from "@angular/forms";
 import {RegisterComponent} from "./register/register.component";
 import {HomepageComponent} from "./homepage/homepage.component";
-import {LoggedInPageComponent} from "./logged-in-page/logged-in-page.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatMenuModule} from "@angular/material/menu";
+import { SurveyTableComponent } from './survey-table/survey-table.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +25,8 @@ import {MatMenuModule} from "@angular/material/menu";
     DialogTemplateComponent,
     LoginComponent,
     RegisterComponent,
-    LoggedInPageComponent,
-    HomepageComponent
+    HomepageComponent,
+    SurveyTableComponent
   ],
   imports: [
     BrowserModule,

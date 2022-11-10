@@ -12,9 +12,7 @@ import {AppComponent} from "../app.component";
 export class DialogTemplateComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {
-    title:string,
-    component:string,
-    buttons: Button[]
+    title:string
   }, public dialogRef: MatDialogRef<DialogTemplateComponent>) { }
 
   setPage(isHome:boolean) {

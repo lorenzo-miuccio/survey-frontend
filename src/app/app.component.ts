@@ -65,7 +65,7 @@ export class AppComponent {
 
     } else {
       let dialogRef = this.dialog.open(RegisterComponent, config);
-      dialogRef.afterClosed().subscribe((result) => {
+      dialogRef.afterClosed().subscribe((result: User) => {
         // console.log(result);
         if(result != null){
           this._userLoggedIn = result;

@@ -1,13 +1,13 @@
 export class User {
 
-  private _pass: String;
   private _mail:String;
+  private _pass: String;
   private _isAdmin:boolean;
 
 
   constructor( mail: String, pass: String, isAdmin: boolean) {
-    this._pass = pass;
     this._mail = mail;
+    this._pass = pass;
     this._isAdmin = isAdmin;
   }
 

@@ -8,14 +8,13 @@ import {SurveyTableComponent} from "./survey-table/survey-table.component";
 import {SurveyToSubmitComponent} from "./survey-to-submit/survey-to-submit.component";
 
 const routes: Routes = [{
-  //path: 'app', component: AppComponent},{
-  //path: 'login', component: LoginComponent},{
-  //path: 'register', component: RegisterComponent}, {
+  path: 'login', component: LoginComponent},{
+  path: 'register', component: RegisterComponent}, {
   path: 'homepage', component: HomepageComponent}, {
   //{  path: 'homepage', component: HomepageComponent, outlet:"test"},
   path: '', redirectTo: 'homepage', pathMatch: "full"}, { // reindirizza l'homepage sul router-outlet
   path: 'surveysTable', component:SurveyTableComponent}, {
-  path: 'surveyToSubmit', component:SurveyToSubmitComponent
+  path: 'submit-survey', component:SurveyToSubmitComponent
 }
 ];
 

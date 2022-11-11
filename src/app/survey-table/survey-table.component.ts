@@ -97,9 +97,15 @@ export class SurveyTableComponent implements OnInit {
 
       let dialogRef = this.dialog.open(DialogTemplateComponent, config);
       dialogRef.afterClosed().subscribe((result) => {
-          if(result){
-            this.router.navigate(["surveyToSubmit"], {skipLocationChange:true});
-          }
+        if(result){
+          this.router.navigate(["/submit-survey"], {
+            queryParams: {
+              surveyTitle: row.name,
+              id: row.id
+            }
+          });
+        }
+
       });
     }
 }

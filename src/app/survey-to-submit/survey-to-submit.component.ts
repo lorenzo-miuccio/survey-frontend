@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-survey-to-submit',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SurveyToSubmitComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private _route: ActivatedRoute) { }
+
+  private surveyId:any;
 
   ngOnInit(): void {
+    this.surveyId = this._route.snapshot.queryParamMap.get("id");
+
   }
 
 }

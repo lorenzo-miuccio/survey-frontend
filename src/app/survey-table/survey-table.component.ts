@@ -14,6 +14,10 @@ import {MatTableDataSource} from "@angular/material/table";
 export class SurveyTableComponent implements OnInit {
 
   private _surveys: Survey[] = [];
+  private _numbOfSurveys!:number
+  private _currentPage = 0;
+  private _maxPage!: number;
+
   public _dataSource!: MatTableDataSource<Survey>;
   public displayedColumns: string[] = ['title', 'email', 'description', 'category', 'publishDate', 'endingDate'];
 
@@ -37,7 +41,9 @@ export class SurveyTableComponent implements OnInit {
          'GET', null)
       .then((res) => { //res è boolean isAdmin
         if(res != null) {
-          this._surveys = res;
+          this._surveys = res['surveys'];
+          this._numbOfSurveys = res['numbOfSurveys'];
+          this._currentPage = page;
           this._dataSource = new MatTableDataSource<Survey>(this._surveys);
         }
       }).catch((err) => {

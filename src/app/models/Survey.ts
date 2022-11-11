@@ -10,3 +10,8 @@ export interface Survey {
   publish_date: Date,
   ending_date: Date
 }
+
+export interface SurveysToSend {
+  numbOfSurveys: number;
+  surveys: Survey[];
+}

@@ -12,7 +12,7 @@ import { MatCardModule            } from '@angular/material/card';
 import { MatInputModule           } from '@angular/material/input';
 import { MatIconModule            } from '@angular/material/icon';
 import { MatButtonModule          } from '@angular/material/button';
-import { ReactiveFormsModule      } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RegisterComponent} from "./register/register.component";
 import {HomepageComponent} from "./homepage/homepage.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -23,6 +23,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatSelectModule} from "@angular/material/select";
 import { SurveyToSubmitComponent } from './survey-to-submit/survey-to-submit.component';
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -50,7 +51,9 @@ import { SurveyToSubmitComponent } from './survey-to-submit/survey-to-submit.com
     MatTableModule,
     MatToolbarModule,
     MatExpansionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRadioModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

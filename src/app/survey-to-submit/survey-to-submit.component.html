@@ -1,1 +1,11 @@
-<p>survey-to-submit works!</p>
+<div *ngFor="let t of test; let i = index">
+<label id="t.id" > {{t.domanda}}</label>
+<mat-radio-group class="radio-group" aria-label="Select an option" [(ngModel)]="listresponses[i]">
+  <mat-radio-button [value] = "{id_question:t.domanda, id_answer:a1}" *ngFor="let a1 of t.array" >{{a1}}</mat-radio-button>
+</mat-radio-group>
+</div>
+
+<div *ngFor="let r of listresponses; let i = index">
+  Risposta {{listresponses[i].id_question}}: {{listresponses[i].id_answer}}
+</div>
+

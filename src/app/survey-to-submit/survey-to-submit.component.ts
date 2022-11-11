@@ -11,11 +11,30 @@ export class SurveyToSubmitComponent implements OnInit {
 
   constructor(private _route: ActivatedRoute) { }
 
+  public test!: Test[];
+  public listresponses: Responses[] = [];
   private surveyId:any;
 
   ngOnInit(): void {
     this.surveyId = this._route.snapshot.queryParamMap.get("id");
 
+    this.test = [{ domanda: "Domanda 1",
+      array:[1,2,3]}, {
+      domanda: "Domanda 2",
+      array:[4,5,6]
+    }];
+
+
   }
 
+}
+
+interface Test {
+  domanda:string,
+  array :number[]
+}
+
+interface Responses {
+  id_question: number;
+  id_answer: number;
 }

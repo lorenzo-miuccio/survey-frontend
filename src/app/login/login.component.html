@@ -1,6 +1,6 @@
 
 <div class="full-page">
-  <mat-dialog-content class="mat-typography">
+  <mat-dialog-content class="mat-typography" >
 
     <h2 mat-dialog-title> {{data.title}} </h2>
     <mat-card fxLayoutAlign="center center">
@@ -21,7 +21,7 @@
           </mat-form-field>
 
 
-          <p>If you don't have an account <a routerLink="" (click)="close(); appComp.openLogin('NEW ACCOUNT')">click here</a></p>
+          <p>If you don't have an account <a routerLink="" (click)="this.newAccount()">click here</a></p>
 
         </mat-card-content>
 

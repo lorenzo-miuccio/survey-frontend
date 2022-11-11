@@ -51,16 +51,14 @@ export class AppComponent {
           this._userLoggedIn = result;
           this._isLogged = true;
         }
-        console.log(result);
       });
 
     } else {
       let dialogRef = this.dialog.open(RegisterComponent, config);
-      dialogRef.afterClosed().subscribe((result: User) => {
+      dialogRef.afterClosed().subscribe((result) => {
         // console.log(result);
         if(result != null){
           this._userLoggedIn = result;
-          console.log(this._userLoggedIn)
           this._isLogged = true;
         }
       });
@@ -74,5 +72,3 @@ export class AppComponent {
     this.router.navigate(["homepage"], {skipLocationChange: true});
   }
 }
-
-

@@ -10,13 +10,8 @@ import {AppComponent} from "../app.component";
 })
 export class DialogTemplateComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {
-    title:string
-  }, public dialogRef: MatDialogRef<DialogTemplateComponent>) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { surveyTitle:string }, public dialogRef: MatDialogRef<DialogTemplateComponent>) { }
 
-  setPage(isHome:boolean) {
-    this.dialogRef.close();
-  }
 
   ngOnInit(): void {
 

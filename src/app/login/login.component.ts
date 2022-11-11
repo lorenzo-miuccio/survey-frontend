@@ -1,6 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
-import {DialogTemplateComponent} from "../dialog-template/dialog-template.component";
 import {RestApiService} from "../services/rest-api.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "../models/User";
@@ -22,7 +21,6 @@ export class LoginComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { title:string },
     private ras: RestApiService,
     private dialogRef: MatDialogRef<LoginComponent>,
-    private dialog: MatDialog,
     public appComp: AppComponent,
     public router: Router,
 
@@ -60,6 +58,11 @@ export class LoginComponent implements OnInit {
 
   public hasError(controlName: string, errorName: string): boolean {
     return this.form.controls[controlName].hasError(errorName);
+  }
+
+  newAccount() {
+    this.close();
+    this.appComp.openLogin('NEW ACCOUNT');
   }
 
 }

@@ -1,7 +1,14 @@
 h2 {
   text-align: center;
 }
+button {
+  margin: auto;
+  cursor: pointer;
+  width:  30%;
+  text-transform: uppercase;
+}
 
-mat-dialog-content {
+
+span {
   text-align: center;
 }

@@ -20,6 +20,7 @@
     <span *ngIf="this.isLogged == true"> {{ this.userLoggedIn.mail }}</span>
 
     <span *ngIf="this.isLogged == true">
+
     <button mat-button [matMenuTriggerFor]="menu"><mat-icon> account_circle </mat-icon></button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item [disabled]="this.userLoggedIn.isAdmin" > <mat-icon> credit_card </mat-icon> UPGRADE</button>

@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{data.title}}</h2>
+<h2 mat-dialog-title> Are you sure to enroll in the survey "{{data.surveyTitle}}" ?</h2>
 
 <!--<mat-dialog-content>-->
 <!--  <app-login *ngIf="data.component == 'login'"></app-login>-->
@@ -6,10 +6,10 @@
 <!--</mat-dialog-content>-->
 
 <!--<mat-dialog-actions align="center">-->
-<!--  <span *ngFor="let button of data.buttons;">-->
-<!--      <button *ngIf="button.isEnter" mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="setPage(false)"> {{button.label}} </button>-->
-<!--      <button *ngIf="!button.isEnter" mat-button mat-dialog-close> {{button.label}} </button>-->
-<!--  </span>-->
+  <span>
+      <button mat-button [mat-dialog-close]="true" > ENROLL </button>
+      <button mat-button cdkFocusInitial mat-dialog-close="false"> CANCEL </button> <!-- chiude il dialog e ritorna false -->
+  </span>
 
 <!--&lt;!&ndash;  <button mat-button mat-dialog-close>CANCEL</button>&ndash;&gt;-->
 <!--&lt;!&ndash;  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>ENTER</button>*/&ndash;&gt;-->

@@ -20,6 +20,9 @@ import {MatMenuModule} from "@angular/material/menu";
 import { SurveyTableComponent } from './survey-table/survey-table.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatSelectModule} from "@angular/material/select";
+import { SurveyToSubmitComponent } from './survey-to-submit/survey-to-submit.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     LoginComponent,
     RegisterComponent,
     HomepageComponent,
-    SurveyTableComponent
+    SurveyTableComponent,
+    SurveyToSubmitComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,9 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     ReactiveFormsModule,
     MatMenuModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatExpansionModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -27,7 +27,7 @@ export class SurveyTableComponent implements OnInit {
   private _pageSizes: number[] = [2, 5];
   private _prevSize: number = 1;
   public sizeSelected: number = 1; // default pageSize
-  private _sortCriteria: SortCriteria = {
+  private _sortCriteria: Sort = {
     active: 'ending_date',
     direction: 'asc'
   };
@@ -80,12 +80,12 @@ export class SurveyTableComponent implements OnInit {
     return this._pageSizes;
   }
 
-
   public async goToPage(page: number) {
     await this.ras.callApi('http://localhost:8080/survey/api/notSubmittedSurveys/' + this.appComponent.userLoggedIn.mail +
       '?page=' + page +
-      '&size=' + this.sizeSelected,
-      'GET', this.sortCriteria)
+      '&size=' + this.sizeSelected +
+      '&sort=' + encodeURIComponent(JSON.stringify(this.sortCriteria)),
+      'GET',null)
       .then((res) => { //res è boolean isAdmin
         if (res != null) {
           this._surveys = res['surveys'];
@@ -138,15 +138,15 @@ export class SurveyTableComponent implements OnInit {
   }
 
   public sortColumn(sort: Sort){
-    console.log(sort.active + "   " + sort.direction);
+
     if (!sort.active || sort.direction === '') {
       this._sortCriteria.active = "ending_date";
       this._sortCriteria.direction = "asc";
     } else {
-
-      this._sortCriteria.active = sort.active;
-      this._sortCriteria.direction = sort.direction;
+      this._sortCriteria = sort;
     }
+    // console.log(JSON.stringify(this.sortCriteria));
+    // console.log(encodeURIComponent(JSON.stringify(this.sortCriteria)));
     this.goToPage(0);
   }
 

@@ -13,6 +13,10 @@ th {
   text-align: center;
 }
 
+td.capFirst:first-letter {
+  text-transform: capitalize;
+}
+
 
 .table-buttons {
   position: absolute;

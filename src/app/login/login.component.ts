@@ -19,10 +19,10 @@ export class LoginComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { title:string },
-    private ras: RestApiService,
-    private dialogRef: MatDialogRef<LoginComponent>,
-    public appComp: AppComponent,
-    public router: Router,
+    private ras:          RestApiService,
+    private dialogRef:    MatDialogRef<LoginComponent>,
+    public appComp:       AppComponent,
+    public router:        Router,
 
   ) {
 

@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {throwError} from "rxjs";
 
 @Injectable({
   providedIn: 'any'
@@ -12,7 +11,7 @@ export class RestApiService {
   }
 
   callApi(url: string, method: string, body: any) {
-    let promise = new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
       switch (method.toUpperCase()) {
@@ -28,9 +27,9 @@ export class RestApiService {
               console.log('complete');
             },
           });
-        break;
+          break;
         case 'POST':
-          this.http.post(url, JSON.stringify(body), { headers: headers }).subscribe({
+          this.http.post(url, JSON.stringify(body), {headers: headers}).subscribe({
             next: (res: any) => {
               resolve(res);
             },
@@ -41,9 +40,9 @@ export class RestApiService {
               //console.log('complete');
             },
           });
-        break;
+          break;
         case 'PUT':
-          this.http.put(url, JSON.stringify(body), { headers: headers }).subscribe({
+          this.http.put(url, JSON.stringify(body), {headers: headers}).subscribe({
             next: (res: any) => {
               resolve(res);
             },
@@ -67,11 +66,10 @@ export class RestApiService {
               //console.log('complete');
             },
           });
-        break;
+          break;
       }
 
     });
-    return promise;
   }
 
 }

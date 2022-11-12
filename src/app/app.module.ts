@@ -24,6 +24,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatSelectModule} from "@angular/material/select";
 import { SurveyToSubmitComponent } from './survey-to-submit/survey-to-submit.component';
 import {MatRadioModule} from "@angular/material/radio";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -35,26 +36,27 @@ import {MatRadioModule} from "@angular/material/radio";
     SurveyTableComponent,
     SurveyToSubmitComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatCardModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatMenuModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatExpansionModule,
-    MatSelectModule,
-    MatRadioModule,
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatCardModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatMenuModule,
+        MatTableModule,
+        MatToolbarModule,
+        MatExpansionModule,
+        MatSelectModule,
+        MatRadioModule,
+        FormsModule,
+        MatSortModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

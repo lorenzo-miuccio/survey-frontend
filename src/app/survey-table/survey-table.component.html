@@ -1,74 +1,75 @@
-<div class="mat-elevation-z8" style="width: 80%; margin:auto">
-  <br><br>
-  <mat-card-title style="text-align: center"> Surveys not submitted yet </mat-card-title>
-  <table mat-table [dataSource]="dataSource">
 
-    <ng-container matColumnDef="idSurvey">
-      <th mat-header-cell *matHeaderCellDef> Title </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+  <mat-card-title style="text-align: center; margin:40px auto"> Surveys not submitted yet </mat-card-title>
 
-    <!-- Title Column -->
-    <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef> Title </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
+  <div class="mat-elevation-z8">
+    <table  mat-table [dataSource]="dataSource" matSort (matSortChange)="sortColumn($event)">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef > Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
 
-    <!-- Mail Column -->
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> Creator Mail </th>
-      <td mat-cell *matCellDef="let element"> {{element.id_mail}} </td>
-    </ng-container>
+      <!-- Title Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td class="capFirst" mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef> Description </th>
-      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-    </ng-container>
+      <!-- Mail Column -->
+      <ng-container matColumnDef="id_mail">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Creator Mail </th>
+        <td mat-cell *matCellDef="let element"> {{element.id_mail}} </td>
+      </ng-container>
 
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef> Category </th>
-      <td mat-cell *matCellDef="let element"> {{element.category.name}} </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="publishDate">
-      <th mat-header-cell *matHeaderCellDef> Publish Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.publish_date}} </td>
-    </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+        <td class="capFirst" mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
 
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="endingDate">
-      <th mat-header-cell *matHeaderCellDef> Ending Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.ending_date}} </td>
-    </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="category.name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+        <td class="capFirst" mat-cell *matCellDef="let element"> {{element.category.name}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="publish_date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Publish Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.publish_date}} </td>
+      </ng-container>
 
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr
-      mat-row
-      (click)="goToSurvey(row)"
-      *matRowDef="let row; columns: displayedColumns;"
-      title="Click to enroll in this survey"
-    > </tr>
-  </table>
-
-  <span class="table-buttons">
-    <mat-form-field >
-      <mat-select panelClass="my-select-panel-class" [(value)]="sizeSelected" (selectionChange) = "refreshPage()">
-        <mat-option [value]="1"> 1 </mat-option>
-        <mat-option *ngFor="let size of pageSizes" [value]="size">
-          {{size}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <!-- Name Column -->
+      <ng-container matColumnDef="ending_date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ending Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.ending_date}} </td>
+      </ng-container>
 
 
-    <button mat-button [disabled]="this.currentPage == 0" (click)="this.goToPage(this.currentPage - 1)"> < </button>
-    <span> pag. {{currentPage+1}} su {{maxPage+1}} </span>
-    <button mat-button [disabled]="this.currentPage == maxPage" (click)="this.goToPage(this.currentPage + 1)"> > </button>
-  </span>
-</div>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        (click)="goToSurvey(row)"
+        *matRowDef="let row; columns: displayedColumns;"
+        title="Click to enroll in this survey"
+      > </tr>
+    </table>
+
+    <span class="table-buttons">
+      <mat-form-field>
+        <mat-select panelClass="my-select-panel-class" [(value)]="sizeSelected" (selectionChange) = "refreshPage()">
+          <mat-option [value]="1"> 1 </mat-option>
+          <mat-option *ngFor="let size of pageSizes" [value]="size">
+            {{size}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <button mat-button [disabled]="this.currentPage == 0" (click)="this.goToPage(this.currentPage - 1)"> < </button>
+      <span> pag. {{currentPage+1}} su {{maxPage+1}} </span>
+      <button mat-button [disabled]="this.currentPage == maxPage" (click)="this.goToPage(this.currentPage + 1)"> > </button>
+    </span>
+
+  </div>

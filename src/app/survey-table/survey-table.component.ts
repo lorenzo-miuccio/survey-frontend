@@ -101,14 +101,10 @@ export class SurveyTableComponent implements OnInit {
 
   public refreshPage() {
 
-    let tmpPage: number
-    if (this.maxPage != this.currentPage) {
-      let numDispSurv: number = this._prevSize * (this.currentPage + 1);
-      tmpPage = Math.ceil(numDispSurv / this.sizeSelected) - 1;
-    } else {
-      let numDispSurv: number = this._numbOfSurveys;
-      tmpPage = Math.ceil(numDispSurv / this.sizeSelected) - 1;
-    }
+
+    let indexDispSurv: number = this._prevSize * this.currentPage + 1;
+    let tmpPage = Math.ceil(indexDispSurv / this.sizeSelected) - 1;
+
     this._prevSize = this.sizeSelected;
     this.goToPage(tmpPage);
   }

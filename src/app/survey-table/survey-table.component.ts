@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Survey} from "../models/Survey";
 import {User} from "../models/User";
 import {RestApiService} from "../services/rest-api.service";
@@ -9,6 +9,8 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {LoginComponent} from "../login/login.component";
 import {Router} from "@angular/router";
 import {DialogTemplateComponent} from "../dialog-template/dialog-template.component";
+import {MatSort, Sort} from "@angular/material/sort";
+import {SortCriteria} from "../models/SortCriteria";
 
 
 @Component({
@@ -19,21 +21,43 @@ import {DialogTemplateComponent} from "../dialog-template/dialog-template.compon
 export class SurveyTableComponent implements OnInit {
 
   private _surveys: Survey[] = [];
-  private _numbOfSurveys!:number
+  private _numbOfSurveys!: number
   private _currentPage = 0;
   private _maxPage!: number;
   private _pageSizes: number[] = [2, 5];
-  private prevSize: number = 1;
-  public sizeSelected: number = 1;
+  private _prevSize: number = 1;
+  public sizeSelected: number = 1; // default pageSize
+  private _sortCriteria: SortCriteria = {
+    active: 'ending_date',
+    direction: 'asc'
+  };
 
   public _dataSource!: MatTableDataSource<Survey>;
-  public displayedColumns: string[] = ['title', 'email', 'description', 'category', 'publishDate', 'endingDate'];
+  public displayedColumns: string[] = ['name', 'id_mail', 'description', 'category.name', 'publish_date', 'ending_date'];
 
-  constructor(public ras:RestApiService, private appComponent: AppComponent, public dialog: MatDialog, public router:Router) {}
+  constructor(public ras: RestApiService, private appComponent: AppComponent, public _dialog: MatDialog, public router: Router) {
+  }
 
   ngOnInit(): void {
     this.goToPage(0);
 
+  }
+
+
+  get numbOfSurveys(): number {
+    return this._numbOfSurveys;
+  }
+
+  get prevSize(): number {
+    return this._prevSize;
+  }
+
+  get sortCriteria(): SortCriteria {
+    return this._sortCriteria;
+  }
+
+  get dialog(): MatDialog {
+    return this._dialog;
   }
 
   get surveys(): Survey[] {
@@ -56,15 +80,18 @@ export class SurveyTableComponent implements OnInit {
     return this._pageSizes;
   }
 
-  public async goToPage(page:number) {
-       await this.ras.callApi('http://localhost:8080/survey/api/notSubmittedSurveys/' + this.appComponent.userLoggedIn.mail + '?page=' + page + '&size=' + this.sizeSelected,
-         'GET', null)
+
+  public async goToPage(page: number) {
+    await this.ras.callApi('http://localhost:8080/survey/api/notSubmittedSurveys/' + this.appComponent.userLoggedIn.mail +
+      '?page=' + page +
+      '&size=' + this.sizeSelected,
+      'GET', this.sortCriteria)
       .then((res) => { //res è boolean isAdmin
-        if(res != null) {
+        if (res != null) {
           this._surveys = res['surveys'];
           this._numbOfSurveys = res['numbOfSurveys'];
           this._currentPage = page;
-          this._maxPage = Math.ceil(this._numbOfSurveys/this.sizeSelected) - 1;
+          this._maxPage = Math.ceil(this._numbOfSurveys / this.sizeSelected) - 1;
           this._dataSource = new MatTableDataSource<Survey>(this._surveys);
         }
       }).catch((err) => {
@@ -75,37 +102,52 @@ export class SurveyTableComponent implements OnInit {
   public refreshPage() {
 
     let tmpPage: number
-    if(this.maxPage != this.currentPage) {
-      let numDispSurv: number = this.prevSize * (this.currentPage + 1);
-      tmpPage = Math.ceil(numDispSurv/this.sizeSelected) - 1;
+    if (this.maxPage != this.currentPage) {
+      let numDispSurv: number = this._prevSize * (this.currentPage + 1);
+      tmpPage = Math.ceil(numDispSurv / this.sizeSelected) - 1;
     } else {
       let numDispSurv: number = this._numbOfSurveys;
-      tmpPage = Math.ceil(numDispSurv/this.sizeSelected) - 1;
+      tmpPage = Math.ceil(numDispSurv / this.sizeSelected) - 1;
     }
-    this.prevSize = this.sizeSelected;
+    this._prevSize = this.sizeSelected;
     this.goToPage(tmpPage);
+  }
+
+  public goToSurvey(row: Survey) {
+    const config = new MatDialogConfig();
+
+    config.disableClose = true;
+    config.height = "250px";
+    config.width = "600px";
+    config.data = {
+      surveyTitle: row.name,
     }
 
-    public goToSurvey(row: Survey) {
-      const config = new MatDialogConfig();
-
-      config.disableClose = true;
-      config.height       = "250px";
-      config.width        = "600px";
-      config.data = {surveyTitle: row.name,
+    let dialogRef = this._dialog.open(DialogTemplateComponent, config);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.router.navigate(["/submit-survey"], {
+          queryParams: {
+            surveyTitle: row.name,
+            id: row.id
+          }
+        });
       }
 
-      let dialogRef = this.dialog.open(DialogTemplateComponent, config);
-      dialogRef.afterClosed().subscribe((result) => {
-        if(result){
-          this.router.navigate(["/submit-survey"], {
-            queryParams: {
-              surveyTitle: row.name,
-              id: row.id
-            }
-          });
-        }
+    });
+  }
 
-      });
+  public sortColumn(sort: Sort){
+    console.log(sort.active + "   " + sort.direction);
+    if (!sort.active || sort.direction === '') {
+      this._sortCriteria.active = "ending_date";
+      this._sortCriteria.direction = "asc";
+    } else {
+
+      this._sortCriteria.active = sort.active;
+      this._sortCriteria.direction = sort.direction;
     }
+    this.goToPage(0);
+  }
+
 }

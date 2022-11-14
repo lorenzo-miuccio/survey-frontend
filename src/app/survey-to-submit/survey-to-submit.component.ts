@@ -11,7 +11,7 @@ import {Question} from "../models/Question";
 })
 export class SurveyToSubmitComponent implements OnInit {
 
-  public _pagesArray: any = [];
+  public _pagesArray: Page[] = [];
 
   private _maxPage!: number;
   private _currentPage: number = 0;

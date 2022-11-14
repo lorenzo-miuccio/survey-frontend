@@ -5,7 +5,7 @@
 </mat-radio-group>
 </div>
 
-<ng-container *ngIf="_pagesArray[0]">
+
 <button mat-stroked-button (click)="getQuestions(this.currentPage - 1)" [disabled]="this.currentPage == 0"> < </button>
 
 <button mat-stroked-button *ngIf="maxPage != currentPage" (click)="getQuestions(this.currentPage + 1)"
@@ -13,7 +13,7 @@
 
 <button mat-stroked-button *ngIf="maxPage == currentPage"
           [disabled]="this._pagesArray[this.currentPage]?.responses?.includes(undefined) || this._pagesArray[this.currentPage]?.responses?.length != this.questions.length"> SUBMIT </button>
-</ng-container>
+
 <!--<div *ngIf="this._pagesArray[this.currentPage].responses.length != 0">-->
 <!--  <div *ngFor="let r of this._pagesArray[this.currentPage].responses; let i = index">-->
 <!--    Risposta {{r.id_question}}: {{r.id_answer}}-->

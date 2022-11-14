@@ -11,11 +11,11 @@ import {Question} from "../models/Question";
 })
 export class SurveyToSubmitComponent implements OnInit {
 
-  public _pagesArray: Page[] = [{pageNumber: 0, responses: ['']}];
+  public _pagesArray: Page[] = [{pageNumber: 0, responses: []}];
 
   private _maxPage!: number;
   private _currentPage: number = 0;
-  private _pageSize: number = 3;
+  private _pageSize: number = 2;
   private _questions: Question[] = [];
   private _numbOfQuestions!: number;
   private _surveyId:any;
@@ -66,15 +66,9 @@ export class SurveyToSubmitComponent implements OnInit {
     this._surveyId = this._route.snapshot.queryParamMap.get("id");
     this._mailUser = this._route.snapshot.queryParamMap.get("mail");
     this.getQuestions(0);
+    document.getElementById("prova").style.display="true";
+    console.log(this.pagesArray[0].responses);
 
-    let responsesTemplate: string [] = [];
-    for(let i = 0; i < this.questions.length; i++) {
-      responsesTemplate[i] = "";
-    }
-    console.log(responsesTemplate);
-    this._pagesArray[0].responses = responsesTemplate;
-    console.log("risposte prima pagina");
-    console.log(this._pagesArray[this._currentPage].responses);
   }
 
   public checkResp() {
@@ -108,11 +102,7 @@ export class SurveyToSubmitComponent implements OnInit {
           }
 
           if(!pagePresent) {
-            let responsesTemplate: string [] = [];
-            for(let i = 0; i < this.questions.length; i++) {
-              responsesTemplate[i] = "";
-            }
-            let pageItem: Page = {pageNumber: page, responses: responsesTemplate};
+            let pageItem: Page = {pageNumber: page, responses: []};
             this.pagesArray.push(pageItem);
           }
         }
@@ -125,10 +115,10 @@ export class SurveyToSubmitComponent implements OnInit {
 
 interface Response {
   id_question: number,
-  id_answer?: number
+  id_answer: number
 }
 
 interface Page {
   pageNumber: number,
-  responses?: String[]
+  responses: (String | undefined) []
 }

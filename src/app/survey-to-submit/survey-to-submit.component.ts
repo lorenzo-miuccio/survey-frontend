@@ -18,8 +18,8 @@ export class SurveyToSubmitComponent implements OnInit {
   private _pageSize: number = 2;
   private _questions: Question[] = [];
   private _numbOfQuestions!: number;
-  private _surveyId:any;
-  private _mailUser!: any;
+  private _surveyId: any;
+  private _mailUser: any;
 
   constructor(private _route: ActivatedRoute, public ras: RestApiService) { }
 
@@ -64,6 +64,9 @@ export class SurveyToSubmitComponent implements OnInit {
   ngOnInit(): void {
     this._surveyId = this._route.snapshot.queryParamMap.get("id");
     this._mailUser = this._route.snapshot.queryParamMap.get("mail");
+    console.log(this.maxPage);
+    console.log(this._pagesArray.length);
+
     this.getQuestions(0);
 
     console.log(this.pagesArray[0].responses);
@@ -93,16 +96,14 @@ export class SurveyToSubmitComponent implements OnInit {
           this._maxPage = Math.ceil(this._numbOfQuestions / this._pageSize) - 1;
 
           let pagePresent = false;
-          for(let i = 0; i < this.pagesArray.length; i++) {
-            if(this.pagesArray[i].pageNumber == page) {
+          for(let i = 0; i < this._pagesArray.length; i++) {
+            if(this._pagesArray[i].pageNumber == page) {
               pagePresent = true;
-              break;
+              break
             }
           }
-
-          if(!pagePresent) {
-            let pageItem: Page = {pageNumber: page, responses: []};
-            this.pagesArray.push(pageItem);
+          if(!pagePresent){
+            this.pagesArray.push({pageNumber: page, responses: []});
           }
         }
       }).catch((err) => {

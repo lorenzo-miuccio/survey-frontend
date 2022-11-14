@@ -1,9 +1,10 @@
 <div *ngFor="let question of this.questions; let i = index">
 <label [id]="question.id" > {{question.question}}</label>
-<mat-radio-group class="radio-group" aria-label="Select an option" [formControlName]="question.id" [(ngModel)]="this._pagesArray[this.currentPage].responses[i]" >
+<mat-radio-group class="radio-group" aria-label="Select an option" [(ngModel)]="this._pagesArray[this.currentPage].responses[i]" >
   <mat-radio-button [value] = "{id_question: question.id, id_answer:answer.id}|json" *ngFor="let answer of question.answers" (click)="checkResp()" >{{answer.answer}} </mat-radio-button>
 </mat-radio-group>
 </div>
+
 
 <button mat-stroked-button (click)="getQuestions(this.currentPage - 1)" [disabled]="this.currentPage== 0"> < </button>
 <button mat-stroked-button *ngIf="maxPage != currentPage" (click)="getQuestions(this.currentPage + 1)" [disabled]="this._pagesArray[this.currentPage].responses.includes('') || this._pagesArray[this.currentPage].responses.length != this.questions.length"> > </button>

@@ -3,7 +3,6 @@ import {ActivatedRoute} from "@angular/router";
 import {User} from "../models/User";
 import {RestApiService} from "../services/rest-api.service";
 import {Question} from "../models/Question";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-survey-to-submit',
@@ -12,11 +11,11 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class SurveyToSubmitComponent implements OnInit {
 
-  public _pagesArray: Page[] = [];
+  public _pagesArray: Page[] = [{pageNumber: 0, responses: ['']}];
 
   private _maxPage!: number;
   private _currentPage: number = 0;
-  private _pageSize: number = 2;
+  private _pageSize: number = 3;
   private _questions: Question[] = [];
   private _numbOfQuestions!: number;
   private _surveyId:any;
@@ -63,22 +62,26 @@ export class SurveyToSubmitComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      mail: new FormControl('', [Validators.required, Validators.email]),
-      pass: new FormControl('', [Validators.required])
-    });
 
     this._surveyId = this._route.snapshot.queryParamMap.get("id");
     this._mailUser = this._route.snapshot.queryParamMap.get("mail");
-    let test: Response = {id_question:1, id_answer:1};
-    console.log(JSON.stringify(test));
     this.getQuestions(0);
+
+    let responsesTemplate: string [] = [];
+    for(let i = 0; i < this.questions.length; i++) {
+      responsesTemplate[i] = "";
+    }
+    console.log(responsesTemplate);
+    this._pagesArray[0].responses = responsesTemplate;
+    console.log("risposte prima pagina");
+    console.log(this._pagesArray[this._currentPage].responses);
   }
 
   public checkResp() {
     for(let i = 0; i < this.pagesArray.length; i++) {
       console.log(this.pagesArray[i].responses);
     }
+
   }
 
 
@@ -109,12 +112,9 @@ export class SurveyToSubmitComponent implements OnInit {
             for(let i = 0; i < this.questions.length; i++) {
               responsesTemplate[i] = "";
             }
-
             let pageItem: Page = {pageNumber: page, responses: responsesTemplate};
-
             this.pagesArray.push(pageItem);
           }
-          console.log(this._pagesArray[this._currentPage].responses);
         }
       }).catch((err) => {
         console.log(err);
@@ -130,5 +130,5 @@ interface Response {
 
 interface Page {
   pageNumber: number,
-  responses: String[]
+  responses?: String[]
 }

@@ -62,11 +62,10 @@ export class SurveyToSubmitComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this._surveyId = this._route.snapshot.queryParamMap.get("id");
     this._mailUser = this._route.snapshot.queryParamMap.get("mail");
     this.getQuestions(0);
-    document.getElementById("prova").style.display="true";
+
     console.log(this.pagesArray[0].responses);
 
   }

@@ -10,7 +10,7 @@ import {LoginComponent} from "../login/login.component";
 import {Router} from "@angular/router";
 import {DialogTemplateComponent} from "../dialog-template/dialog-template.component";
 import {MatSort, Sort} from "@angular/material/sort";
-import {SortCriteria} from "../models/SortCriteria";
+// import {SortCriteria} from "../models/SortCriteria";
 
 
 @Component({
@@ -21,7 +21,7 @@ import {SortCriteria} from "../models/SortCriteria";
 export class SurveyTableComponent implements OnInit {
 
   private _surveys: Survey[] = [];
-  private _numbOfSurveys!: number
+  private _numbOfSurveys!: number;
   private _currentPage = 0;
   private _maxPage!: number;
   private _pageSizes: number[] = [2, 5];
@@ -52,7 +52,7 @@ export class SurveyTableComponent implements OnInit {
     return this._prevSize;
   }
 
-  get sortCriteria(): SortCriteria {
+  get sortCriteria(): Sort {
     return this._sortCriteria;
   }
 
@@ -124,7 +124,8 @@ export class SurveyTableComponent implements OnInit {
         this.router.navigate(["/submit-survey"], {
           queryParams: {
             surveyTitle: row.name,
-            id: row.id
+            id: row.id,
+            mail: this.appComponent.userLoggedIn.mail
           }
         });
       }

@@ -1,11 +1,11 @@
-<div *ngFor="let t of test; let i = index">
-<label id="t.id" > {{t.domanda}}</label>
-<mat-radio-group class="radio-group" aria-label="Select an option" [(ngModel)]="listresponses[i]">
-  <mat-radio-button [value] = "{id_question:t.domanda, id_answer:a1}" *ngFor="let a1 of t.array" >{{a1}}</mat-radio-button>
+<div *ngFor="let question of this.questions; let i = index">
+<label [id]="question.id" > {{question.question}}</label>
+<mat-radio-group class="radio-group" aria-label="Select an option">  <!-- [(ngModel)]="this.responseArray[i] -->
+  <mat-radio-button id="p" [value] = "{id_question:question.id, id_answer:answer.id}" *ngFor="let answer of question.answers" (click)="addResponse({id_question:question.id, id_answer:answer.id})" >{{answer.answer}}</mat-radio-button>
 </mat-radio-group>
 </div>
 
-<div *ngFor="let r of listresponses; let i = index">
-  Risposta {{listresponses[i].id_question}}: {{listresponses[i].id_answer}}
-</div>
+<!--<div *ngFor="let r of responseArray; let i = index">-->
+<!--  Risposta {{responseArray[i].id_question}}: {{responseArray[i].id_answer}}-->
+<!--</div>-->
 

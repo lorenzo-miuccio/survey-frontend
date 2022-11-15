@@ -1,7 +1,7 @@
 
   <mat-card-title style="text-align: center; margin:40px auto"> Surveys not submitted yet </mat-card-title>
 
-  <div class="mat-elevation-z8">
+  <div class="mat-elevation-z8" *ngIf="dataSource">
     <table  mat-table [dataSource]="dataSource" matSort (matSortChange)="sortColumn($event)">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef > Id </th>
@@ -72,4 +72,8 @@
       <button mat-button [disabled]="this.currentPage == maxPage" (click)="this.goToPage(this.currentPage + 1)"> > </button>
     </span>
 
+  </div>
+
+  <div class="mat-elevation-z8" style="width: 25%; padding: 20px" *ngIf="!dataSource">
+    <p class="no-survey"> No survey to submit </p>
   </div>

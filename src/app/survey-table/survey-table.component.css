@@ -31,3 +31,10 @@ td.capFirst:first-letter {
 .mat-row:hover .mat-cell {
   border-color: currentColor;
 }
+
+.no-survey {
+  font-size: 20px;
+  margin: auto;
+  text-align: center;
+}
+

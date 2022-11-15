@@ -40,7 +40,7 @@ export class SurveyTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.goToPage(0);
-
+    console.log(!this.dataSource); // check che non sia nullo
   }
 
 
@@ -93,6 +93,7 @@ export class SurveyTableComponent implements OnInit {
           this._currentPage = page;
           this._maxPage = Math.ceil(this._numbOfSurveys / this.sizeSelected) - 1;
           this._dataSource = new MatTableDataSource<Survey>(this._surveys);
+
         }
       }).catch((err) => {
         console.log(err);
@@ -129,7 +130,6 @@ export class SurveyTableComponent implements OnInit {
           }
         });
       }
-
     });
   }
 

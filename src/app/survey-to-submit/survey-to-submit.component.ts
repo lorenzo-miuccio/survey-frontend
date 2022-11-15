@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {User} from "../models/User";
 import {RestApiService} from "../services/rest-api.service";
 import {Question} from "../models/Question";
 
@@ -11,7 +10,7 @@ import {Question} from "../models/Question";
 })
 export class SurveyToSubmitComponent implements OnInit {
 
-  public _pagesArray: Page[] = [];
+  public _pagesArray: any = [];
 
   private _maxPage!: number;
   private _currentPage: number = 0;
@@ -69,7 +68,6 @@ export class SurveyToSubmitComponent implements OnInit {
 
     this.getQuestions(0);
 
-    console.log(this.pagesArray[0].responses);
 
   }
 
@@ -95,16 +93,7 @@ export class SurveyToSubmitComponent implements OnInit {
           this._currentPage = page;
           this._maxPage = Math.ceil(this._numbOfQuestions / this._pageSize) - 1;
 
-          let pagePresent = false;
-          for(let i = 0; i < this._pagesArray.length; i++) {
-            if(this._pagesArray[i].pageNumber == page) {
-              pagePresent = true;
-              break
-            }
-          }
-          if(!pagePresent){
-            this.pagesArray.push({pageNumber: page, responses: []});
-          }
+          this.pagesArray.push({pageNumber: page, responses: []});
         }
       }).catch((err) => {
         console.log(err);

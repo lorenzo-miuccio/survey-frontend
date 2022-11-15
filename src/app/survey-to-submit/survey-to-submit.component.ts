@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {RestApiService} from "../services/rest-api.service";
 import {Question} from "../models/Question";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatTableDataSource} from "@angular/material/table";
+import {Survey} from "../models/Survey";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {LoginComponent} from "../login/login.component";
+import {RegisterComponent} from "../register/register.component";
+import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-survey-to-submit',
@@ -10,17 +17,17 @@ import {Question} from "../models/Question";
 })
 export class SurveyToSubmitComponent implements OnInit {
 
-  public _pagesArray: any = [];
-
   private _maxPage!: number;
   private _currentPage: number = 0;
   private _pageSize: number = 2;
   private _questions: Question[] = [];
   private _numbOfQuestions!: number;
   private _surveyId: any;
+  private _surveyTitle: any;
   private _mailUser: any;
+  public form!: FormGroup;
 
-  constructor(private _route: ActivatedRoute, public ras: RestApiService) { }
+  constructor(private _route: ActivatedRoute, public ras: RestApiService, public formBuilder: FormBuilder, public dialog: MatDialog, public router: Router) { }
 
 
   get maxPage(): number {
@@ -35,9 +42,6 @@ export class SurveyToSubmitComponent implements OnInit {
     return this._pageSize;
   }
 
-  get pagesArray(): Page[] {
-    return this._pagesArray;
-  }
 
   get questions(): Question[] {
     return this._questions;
@@ -55,28 +59,16 @@ export class SurveyToSubmitComponent implements OnInit {
     return this._mailUser;
   }
 
-  set pagesArray(value: Page[]) {
-    this._pagesArray = value;
-  }
 
   ngOnInit(): void {
     this._surveyId = this._route.snapshot.queryParamMap.get("id");
+    this._surveyTitle = this._route.snapshot.queryParamMap.get("surveyTitle");
     this._mailUser = this._route.snapshot.queryParamMap.get("mail");
-    console.log(this.maxPage);
-    console.log(this._pagesArray.length);
 
+    this.form = new FormGroup({});
     this.getQuestions(0);
 
-
   }
-
-  public checkResp() {
-    for(let i = 0; i < this.pagesArray.length; i++) {
-      console.log(this.pagesArray[i].responses);
-    }
-
-  }
-
 
   public async getQuestions(page: number, size?: number) { // size è opzionale
 
@@ -92,21 +84,58 @@ export class SurveyToSubmitComponent implements OnInit {
           this._currentPage = page;
           this._maxPage = Math.ceil(this._numbOfQuestions / this._pageSize) - 1;
 
-          this.pagesArray.push({pageNumber: page, responses: []});
+          this.questions.forEach(q => {
+            this.form.addControl(q.id.toString(10), new FormControl('', [Validators.required]));
+          })
+
         }
       }).catch((err) => {
         console.log(err);
       });
   }
+
+  public async sendAnswers() {
+
+    console.log(this.form.value);
+    console.log(Object.values(this.form.value));
+
+    let arrayString: string[] = Object.values(this.form.value);
+    let arrayJson: Response[] = [];
+    arrayString.forEach(s => {
+      arrayJson.push(JSON.parse(s));
+    })
+    console.log(JSON.stringify(arrayJson));
+
+    await this.ras.callApi('http://localhost:8080/survey/api/sendSubmittedSurvey' +
+      '?mail=' + this.mailUser +
+      '&id_survey=' + this.surveyId,
+      'PUT', arrayJson)
+      .then((res) => { //res è boolean isAdmin
+        this.openConfirm();
+      }).catch((err) => {
+        console.log(err);
+      });
+  }
+
+  public openConfirm() {
+    const config = new MatDialogConfig();
+
+    config.disableClose = true;
+    config.height       = "300px";
+    config.width        = "400px";
+    config.data = { surveyTitle: this._surveyTitle }
+
+    let dialogRef = this.dialog.open(ConfirmDialogComponent, config);
+    dialogRef.afterClosed().subscribe((result) => {
+      if(result == true) {
+        this.router.navigate(['surveysTable']);
+      }
+    });
+  }
 }
 
 
 interface Response {
-  id_question: number,
-  id_answer: number
-}
-
-interface Page {
-  pageNumber: number,
-  responses: (String | undefined) []
+  idQuestion: number,
+  idAnswer: number
 }

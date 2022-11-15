@@ -25,6 +25,7 @@ import {MatSelectModule} from "@angular/material/select";
 import { SurveyToSubmitComponent } from './survey-to-submit/survey-to-submit.component';
 import {MatRadioModule} from "@angular/material/radio";
 import {MatSortModule} from "@angular/material/sort";
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {MatSortModule} from "@angular/material/sort";
     RegisterComponent,
     HomepageComponent,
     SurveyTableComponent,
-    SurveyToSubmitComponent
+    SurveyToSubmitComponent,
+    ConfirmDialogComponent
   ],
     imports: [
         BrowserModule,

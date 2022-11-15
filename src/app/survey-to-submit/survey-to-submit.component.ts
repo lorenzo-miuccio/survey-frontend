@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {RestApiService} from "../services/rest-api.service";
 import {Question} from "../models/Question";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-survey-to-submit',
@@ -19,8 +20,9 @@ export class SurveyToSubmitComponent implements OnInit {
   private _numbOfQuestions!: number;
   private _surveyId: any;
   private _mailUser: any;
+  public form!: FormGroup;
 
-  constructor(private _route: ActivatedRoute, public ras: RestApiService) { }
+  constructor(private _route: ActivatedRoute, public ras: RestApiService, public formBuilder: FormBuilder) { }
 
 
   get maxPage(): number {
@@ -65,6 +67,7 @@ export class SurveyToSubmitComponent implements OnInit {
     console.log(this.maxPage);
     console.log(this._pagesArray.length);
 
+    this.form = new FormGroup({});
     this.getQuestions(0);
 
 
@@ -91,6 +94,10 @@ export class SurveyToSubmitComponent implements OnInit {
           this._numbOfQuestions = res['numbOfQuestions'];
           this._currentPage = page;
           this._maxPage = Math.ceil(this._numbOfQuestions / this._pageSize) - 1;
+
+          this.questions.forEach(q => {
+            this.form.addControl(q.id.toString(10), new FormControl('', [Validators.required]))
+          })
 
           this.pagesArray.push({pageNumber: page, responses: []});
         }

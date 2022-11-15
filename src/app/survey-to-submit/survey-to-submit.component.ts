@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {RestApiService} from "../services/rest-api.service";
 import {Question} from "../models/Question";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
@@ -27,7 +27,7 @@ export class SurveyToSubmitComponent implements OnInit {
   private _mailUser: any;
   public form!: FormGroup;
 
-  constructor(private _route: ActivatedRoute, public ras: RestApiService, public formBuilder: FormBuilder, public dialog: MatDialog) { }
+  constructor(private _route: ActivatedRoute, public ras: RestApiService, public formBuilder: FormBuilder, public dialog: MatDialog, public router: Router) { }
 
 
   get maxPage(): number {
@@ -129,7 +129,7 @@ export class SurveyToSubmitComponent implements OnInit {
     let dialogRef = this.dialog.open(ConfirmDialogComponent, config);
     dialogRef.afterClosed().subscribe((result) => {
       if(result == true) {
-        this._userLoggedIn = result;
+        this.router.navigate(['surveysTable']);
       }
     });
   }

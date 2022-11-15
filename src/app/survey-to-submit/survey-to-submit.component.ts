@@ -64,11 +64,6 @@ export class SurveyToSubmitComponent implements OnInit {
 
   }
 
-  public checkResp() {
-      console.log(this.form.value);
-  }
-
-
   public async getQuestions(page: number, size?: number) { // size è opzionale
 
     await this.ras.callApi('http://localhost:8080/survey/api/getQuestionsSurvey/' +  this._surveyId +
@@ -94,16 +89,24 @@ export class SurveyToSubmitComponent implements OnInit {
   }
 
   public sendResponses() {
-      this.sendAnswers();
+    console.log(this.form.value);
+      console.log(Object.values(this.form.value));
+
+      let arrayString: string[] = Object.values(this.form.value);
+      let arrayJson: Response[] = [];
+      arrayString.forEach(s => {
+        arrayJson.push(JSON.parse(s));
+      })
+      console.log(JSON.stringify(arrayJson));
+      this.sendAnswers(arrayJson);
   }
 
-  public async sendAnswers() {
+  public async sendAnswers(arrayAnswers: Response[]) {
     await this.ras.callApi('http://localhost:8080/survey/api/sendSubmittedSurvey' +
       '?mail=' + this.mailUser +
       '&id_survey=' + this.surveyId,
-      'PUT',this.form.value)
+      'PUT', arrayAnswers)
       .then((res) => { //res è boolean isAdmin
-
         console.log("ok");
 
       }).catch((err) => {

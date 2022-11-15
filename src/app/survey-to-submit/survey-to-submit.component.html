@@ -2,7 +2,7 @@
   <div *ngFor="let question of this.questions; let i = index">
     <label [id]="question.id" > {{question.question}}</label>
         <mat-radio-group class="radio-group" aria-label="Select an option" [formControlName]="question.id">
-          <mat-radio-button [value] = "{id_question: question.id, id_answer:answer.id}|json" *ngFor="let answer of question.answers" (click)="checkResp()" >{{answer.answer}} </mat-radio-button>
+          <mat-radio-button [value] = "{id_question: question.id, id_answer:answer.id}|json" *ngFor="let answer of question.answers">{{answer.answer}} </mat-radio-button>
         </mat-radio-group>
 
   </div>

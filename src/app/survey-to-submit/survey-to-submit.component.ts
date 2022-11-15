@@ -3,6 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {RestApiService} from "../services/rest-api.service";
 import {Question} from "../models/Question";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatTableDataSource} from "@angular/material/table";
+import {Survey} from "../models/Survey";
 
 @Component({
   selector: 'app-survey-to-submit',
@@ -92,7 +94,21 @@ export class SurveyToSubmitComponent implements OnInit {
   }
 
   public sendResponses() {
+      this.sendAnswers();
+  }
 
+  public async sendAnswers() {
+    await this.ras.callApi('http://localhost:8080/survey/api/sendSubmittedSurvey' +
+      '?mail=' + this.mailUser +
+      '&id_survey=' + this.surveyId,
+      'PUT',this.form.value)
+      .then((res) => { //res è boolean isAdmin
+
+        console.log("ok");
+
+      }).catch((err) => {
+        console.log(err);
+      });
   }
 }
 

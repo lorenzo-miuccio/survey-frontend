@@ -111,8 +111,7 @@ export class SurveyToSubmitComponent implements OnInit {
       '&id_survey=' + this.surveyId,
       'PUT', arrayJson)
       .then((res) => { //res è boolean isAdmin
-
-
+        this.openConfirm();
       }).catch((err) => {
         console.log(err);
       });
@@ -133,7 +132,6 @@ export class SurveyToSubmitComponent implements OnInit {
       }
     });
   }
-
 }
 
 

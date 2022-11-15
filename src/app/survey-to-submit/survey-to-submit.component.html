@@ -9,10 +9,10 @@
 <button mat-stroked-button (click)="getQuestions(this.currentPage - 1)" [disabled]="this.currentPage == 0"> < </button>
 
 <button mat-stroked-button *ngIf="maxPage != currentPage" (click)="getQuestions(this.currentPage + 1)"
-          [disabled]="this._pagesArray[this.currentPage].responses.includes(undefined) || this._pagesArray[this.currentPage].responses.length != this.questions.length"> > </button>
+          [disabled]="this._pagesArray[this.currentPage]?.responses.includes(undefined) || this._pagesArray[this.currentPage]?.responses.length != this.questions.length"> > </button>
 
 <button mat-stroked-button *ngIf="maxPage == currentPage"
-          [disabled]="this._pagesArray[this.currentPage].responses.includes(undefined) || this._pagesArray[this.currentPage].responses.length != this.questions.length"> SUBMIT </button>
+          [disabled]="this._pagesArray[this.currentPage]?.responses.includes(undefined) || this._pagesArray[this.currentPage]?.responses.length != this.questions.length"> SUBMIT </button>
 
 <!--<div *ngIf="this._pagesArray[this.currentPage].responses.length != 0">-->
 <!--  <div *ngFor="let r of this._pagesArray[this.currentPage].responses; let i = index">-->

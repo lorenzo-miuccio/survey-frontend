@@ -55,7 +55,6 @@ export class SurveyToSubmitComponent implements OnInit {
     return this._mailUser;
   }
 
-
   set pagesArray(value: Page[]) {
     this._pagesArray = value;
   }

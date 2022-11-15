@@ -11,8 +11,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class SurveyToSubmitComponent implements OnInit {
 
-  public _pagesArray: any = [];
-
   private _maxPage!: number;
   private _currentPage: number = 0;
   private _pageSize: number = 2;
@@ -37,9 +35,6 @@ export class SurveyToSubmitComponent implements OnInit {
     return this._pageSize;
   }
 
-  get pagesArray(): Page[] {
-    return this._pagesArray;
-  }
 
   get questions(): Question[] {
     return this._questions;
@@ -57,27 +52,18 @@ export class SurveyToSubmitComponent implements OnInit {
     return this._mailUser;
   }
 
-  set pagesArray(value: Page[]) {
-    this._pagesArray = value;
-  }
 
   ngOnInit(): void {
     this._surveyId = this._route.snapshot.queryParamMap.get("id");
     this._mailUser = this._route.snapshot.queryParamMap.get("mail");
-    console.log(this.maxPage);
-    console.log(this._pagesArray.length);
 
     this.form = new FormGroup({});
     this.getQuestions(0);
 
-
   }
 
   public checkResp() {
-    for(let i = 0; i < this.pagesArray.length; i++) {
-      console.log(this.pagesArray[i].responses);
-    }
-
+      console.log(this.form.value);
   }
 
 
@@ -96,14 +82,17 @@ export class SurveyToSubmitComponent implements OnInit {
           this._maxPage = Math.ceil(this._numbOfQuestions / this._pageSize) - 1;
 
           this.questions.forEach(q => {
-            this.form.addControl(q.id.toString(10), new FormControl('', [Validators.required]))
+            this.form.addControl(q.id.toString(10), new FormControl('', [Validators.required]));
           })
 
-          this.pagesArray.push({pageNumber: page, responses: []});
         }
       }).catch((err) => {
         console.log(err);
       });
+  }
+
+  public sendResponses() {
+
   }
 }
 
@@ -111,9 +100,4 @@ export class SurveyToSubmitComponent implements OnInit {
 interface Response {
   id_question: number,
   id_answer: number
-}
-
-interface Page {
-  pageNumber: number,
-  responses: (String | undefined) []
 }

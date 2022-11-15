@@ -5,6 +5,10 @@ import {Question} from "../models/Question";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatTableDataSource} from "@angular/material/table";
 import {Survey} from "../models/Survey";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {LoginComponent} from "../login/login.component";
+import {RegisterComponent} from "../register/register.component";
+import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-survey-to-submit',
@@ -19,10 +23,11 @@ export class SurveyToSubmitComponent implements OnInit {
   private _questions: Question[] = [];
   private _numbOfQuestions!: number;
   private _surveyId: any;
+  private _surveyTitle: any;
   private _mailUser: any;
   public form!: FormGroup;
 
-  constructor(private _route: ActivatedRoute, public ras: RestApiService, public formBuilder: FormBuilder) { }
+  constructor(private _route: ActivatedRoute, public ras: RestApiService, public formBuilder: FormBuilder, public dialog: MatDialog) { }
 
 
   get maxPage(): number {
@@ -57,6 +62,7 @@ export class SurveyToSubmitComponent implements OnInit {
 
   ngOnInit(): void {
     this._surveyId = this._route.snapshot.queryParamMap.get("id");
+    this._surveyTitle = this._route.snapshot.queryParamMap.get("surveyTitle");
     this._mailUser = this._route.snapshot.queryParamMap.get("mail");
 
     this.form = new FormGroup({});
@@ -88,35 +94,50 @@ export class SurveyToSubmitComponent implements OnInit {
       });
   }
 
-  public sendResponses() {
+  public async sendAnswers() {
+
     console.log(this.form.value);
-      console.log(Object.values(this.form.value));
+    console.log(Object.values(this.form.value));
 
-      let arrayString: string[] = Object.values(this.form.value);
-      let arrayJson: Response[] = [];
-      arrayString.forEach(s => {
-        arrayJson.push(JSON.parse(s));
-      })
-      console.log(JSON.stringify(arrayJson));
-      this.sendAnswers(arrayJson);
-  }
+    let arrayString: string[] = Object.values(this.form.value);
+    let arrayJson: Response[] = [];
+    arrayString.forEach(s => {
+      arrayJson.push(JSON.parse(s));
+    })
+    console.log(JSON.stringify(arrayJson));
 
-  public async sendAnswers(arrayAnswers: Response[]) {
     await this.ras.callApi('http://localhost:8080/survey/api/sendSubmittedSurvey' +
       '?mail=' + this.mailUser +
       '&id_survey=' + this.surveyId,
-      'PUT', arrayAnswers)
+      'PUT', arrayJson)
       .then((res) => { //res è boolean isAdmin
-        console.log("ok");
+
 
       }).catch((err) => {
         console.log(err);
       });
   }
+
+  public openConfirm() {
+    const config = new MatDialogConfig();
+
+    config.disableClose = true;
+    config.height       = "300px";
+    config.width        = "400px";
+    config.data = { surveyTitle: this._surveyTitle }
+
+    let dialogRef = this.dialog.open(ConfirmDialogComponent, config);
+    dialogRef.afterClosed().subscribe((result) => {
+      if(result == true) {
+        this._userLoggedIn = result;
+      }
+    });
+  }
+
 }
 
 
 interface Response {
-  id_question: number,
-  id_answer: number
+  idQuestion: number,
+  idAnswer: number
 }

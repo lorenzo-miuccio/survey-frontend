@@ -17,7 +17,7 @@ export class HomepageComponent implements OnInit {
     if(!this.appComponent.isLogged) {
       this.appComponent.openLogin('SIGN IN');
     } else {
-      this.router.navigate(["surveysTable"], {skipLocationChange: true});
+      this.router.navigate(["surveysTable"]);
     }
   }
 

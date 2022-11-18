@@ -23,7 +23,7 @@ export class SurveyTableComponent implements OnInit {
   private _surveys: Survey[] = [];
   private _numbOfSurveys!: number;
   private _currentPage = 0;
-  private _maxPage!: number;
+  private _maxPage: number = 0;
   private _pageSizes: number[] = [2, 5];
   private _prevSize: number = 1;
   public sizeSelected: number = 1; // default pageSize
@@ -87,6 +87,7 @@ export class SurveyTableComponent implements OnInit {
       '&sort=' + encodeURIComponent(JSON.stringify(this.sortCriteria)),
       'GET',null)
       .then((res) => { //res è boolean isAdmin
+        console.log(res);
         if (res != null) {
           this._surveys = res['surveys'];
           this._numbOfSurveys = res['numbOfSurveys'];

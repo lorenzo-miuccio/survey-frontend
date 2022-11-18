@@ -8,7 +8,7 @@
   </div>
 </form>
 
-<button mat-stroked-button (click)="getQuestions(this.currentPage - 1)" [disabled]="this.currentPage == 0"> < </button>
+<button mat-stroked-button (click)="getQuestions(this.currentPage - 1)" [disabled]="this.currentPage == 0 || !form.valid"> < </button>
 
 <button mat-stroked-button *ngIf="maxPage != currentPage" (click)="getQuestions(this.currentPage + 1)"
           [disabled]="!form.valid"> > </button>

@@ -27,6 +27,16 @@ export class HomepageComponent implements OnInit {
     }
   }
 
+  deleteSurveyClick() {
+    if(!this.appComponent.isLogged) {
+      this.appComponent.openLogin('SIGN IN');
+    } else {
+      // TODO: Implement delete survey logic here, e.g., navigate to delete survey page or open a dialog
+      console.log('Delete survey clicked');
+    }
+  }
+  
+
   ngOnInit(): void {
   }
 
